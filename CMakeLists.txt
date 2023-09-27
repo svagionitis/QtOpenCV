@@ -35,33 +35,4 @@ set(COMMON_LINK_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/bin)
 link_directories(${COMMON_LINK_DIRECTORIES})
 
-set(CVMATANDQIMAGE_LIB_TARGET ${PROJECT_NAME})
-set(CVMATANDQIMAGE_SOURCES
-    ${CMAKE_SOURCE_DIR}/lib/cvmatandqimage.cpp
-    )
-
-add_library(${CVMATANDQIMAGE_LIB_TARGET} STATIC ${CVMATANDQIMAGE_SOURCES})
-
-set(TARGET_LINK_LIBRARIES_PRIVATE
-    PRIVATE
-    Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Gui
-    ${OpenCV_LIBS}
-)
-if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    list(APPEND TARGET_LINK_LIBRARIES_PRIVATE
-                ws2_32)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    list(APPEND TARGET_LINK_LIBRARIES_PRIVATE
-                pthread)
-endif ()
-
-target_link_libraries(
-    ${CVMATANDQIMAGE_LIB_TARGET}
-    PRIVATE
-        ${TARGET_LINK_LIBRARIES_PRIVATE})
-
-target_include_directories(
-    ${CVMATANDQIMAGE_LIB_TARGET}
-    PUBLIC
-        ${COMMON_INCLUDE_DIRECTORIES})
+add_subdirectory(lib)
