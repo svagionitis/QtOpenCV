@@ -68,7 +68,6 @@ nsis/*.exe
 
 temp
 debug
-lib/*
 lib64/*
 release
 doc/html/*
